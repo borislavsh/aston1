@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-info
+      author: bshein
+      changes:
+        - insert:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  valueComputed: "random_uuid()"
+              - column:
+                  name: beneficiary_name
+                  value: "Anton Antonov"
+              - column:
+                  name: pin_code
+                  value: "1234"
+              - column:
+                  name: balance
+                  value: 0
+

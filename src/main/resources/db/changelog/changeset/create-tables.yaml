@@ -1,0 +1,73 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-account
+      author: bshein
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: beneficiary_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pin_code
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: balance
+                  type: DECIMAL (16, 2)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: create-transaction
+      author: bshein
+      changes:
+        - createTable:
+            tableName: transaction
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: from_account_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_transaction_from_account
+                    references: account(id)
+              - column:
+                  name: to_account_id
+                  type: UUID
+                  constraints:
+                    foreignKeyName: fk_transaction_to_account
+                    references: account(id)
+              - column:
+                  name: amount
+                  type: DECIMAL(16, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: operation_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+
+
+
